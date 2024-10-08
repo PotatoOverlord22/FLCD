@@ -1,0 +1,9 @@
+// missing ":" after fun integer
+// wrong paranthesis after err, should be "||"
+// missing "=>" after args
+
+fun integer err() {
+    // missing variable type
+    // wrong assignment operator
+    a = 1
+}

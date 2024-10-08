@@ -1,0 +1,16 @@
+fun integer: gccd |integer: first, integer: second| => {
+    while |second != 0| {
+        integer: r -> first % second;
+        first -> second;
+        second -> r;
+    }
+
+    yeet first;
+}
+
+fun void: main || {
+    integer: a -> 10;
+    integer: b -> 15;
+
+    out << gccd|a, b|;
+}
