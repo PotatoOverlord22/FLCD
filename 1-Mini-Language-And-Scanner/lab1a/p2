@@ -12,5 +12,5 @@ fun void: main || {
     integer: a -> 10;
     integer: b -> 15;
 
-    out << gccd|a, b|;
+    out gccd|a, b|;
 }

@@ -1,11 +1,10 @@
-// entry point or something
-fun void: main || => {
+fun void: main | | => {
     integer: first;
     integer: second;
     integer: third;
 
     // read input
-    in >> first >> second >> third;
+    in first;
 
     integer: max -> first;
     if |second > max| {
@@ -16,5 +15,5 @@ fun void: main || => {
         max -> third;
     }
 
-    out << max;
+    out max;
 }

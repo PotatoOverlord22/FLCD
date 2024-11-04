@@ -24,6 +24,6 @@ fun void: main || => {
     arr.append|1|;
     arr.append|2|;
 
-    out << max_array|arr|;
-    out << sum_array|arr|;
+    out max_array|arr|;
+    out sum_array|arr|;
 }

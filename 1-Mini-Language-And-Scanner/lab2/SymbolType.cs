@@ -2,7 +2,8 @@
 {
     public enum SymbolType
     {
-        Int = 0,
-        String = 1
+        Identifier = 0,
+        IntConstant = 1,
+        StringConstant = 2,
     }
 }

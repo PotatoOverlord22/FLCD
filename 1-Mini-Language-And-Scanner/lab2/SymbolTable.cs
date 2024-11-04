@@ -1,40 +1,47 @@
 ﻿namespace FLCD._1_Mini_Language_And_Scanner.lab2
 {
+    using System.Collections.Generic;
+
     public class SymbolTable
     {
-        private SymbolEntry[] _entries;
-        private int _size;
+        private readonly List<SymbolEntry>[] _entries;
 
         public SymbolTable(int size)
         {
-            _size = size;
-            _entries = new SymbolEntry[size];
+            _entries = new List<SymbolEntry>[size];
+            for (int i = 0; i < size; i++) _entries[i] = new List<SymbolEntry>();
         }
 
-        public void Insert(string identifier, object value, SymbolType type)
+        public Tuple<int, int> InsertAndGetPosition(string key, SymbolType type)
         {
-            int index = GetHash(identifier);
-            SymbolEntry entry = new SymbolEntry(identifier, value, type);
+            int index = GetHash(key);
+            _entries[index].Add(new SymbolEntry(key, type));
 
-            _entries[index] = entry;
+            return new Tuple<int, int>(index, _entries[index].Count - 1);
         }
 
-        public SymbolEntry? GetEntry(string identifier)
+        public Tuple<int, int> GetPosition(string key)
         {
-            int index = GetHash(identifier);
-            var entry = _entries[index];
-
-            if (entry != null && entry.Identifier == identifier)
+            int index = GetHash(key);
+            for (int i = 0; i < _entries[index].Count; i++)
             {
-                return entry;
+                if (_entries[index][i].Value == key)
+                {
+                    return new Tuple<int, int>(index, i);
+                }
             }
 
-            return null;
+            return new Tuple<int, int>(-1,-1);
         }
 
-        private int GetHash(string identifier)
+        public SymbolEntry? GetEntry(string key)
         {
-            return Math.Abs(identifier.GetHashCode()) % _size;
+            int index = GetHash(key);
+            return _entries[index].Find(e => e.Value == key);
         }
+
+        public List<SymbolEntry>[] GetEntries() => _entries;
+
+        private int GetHash(string key) => Math.Abs(key.GetHashCode()) % _entries.Length;
     }
 }

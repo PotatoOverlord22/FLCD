@@ -2,13 +2,11 @@
 {
     public class SymbolEntry
     {
+        public string Value { get; set; }
         public SymbolType Type { get; set; }
-        public string Identifier { get; set; }
-        public object Value { get; set; }
 
-        public SymbolEntry(string identifier, object value, SymbolType type)
+        public SymbolEntry(string value, SymbolType type)
         {
-            Identifier = identifier;
             Value = value;
             Type = type;
         }

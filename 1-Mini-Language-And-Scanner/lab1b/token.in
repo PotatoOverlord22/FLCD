@@ -1,29 +1,30 @@
-FUNCTION      -> 'fun'
-INTEGER       -> 'integer'
-VOID          -> 'void'
-FOR           -> 'for'
-IF            -> 'if'
-RETURN        -> 'yeet'
-ASSIGN        -> '->'
-PLUS ASSIGN   -> '+->'
-ARROW         -> '=>'
-PLUS          -> '+'
-MINUS         -> '-'
-MULTIPLY      -> '*'
-DIVIDE        -> '/'
-LESS          -> '<'
-GREATER       -> '>'
-LESS EQUAL    -> '<='
-GREATER EQUAL -> '>='
-EQUAL         -> '=='
-NOT_EQUAL     -> '!='
-OUTPUT        -> 'out <<'
-INPUT         -> 'in >>'
-LEFT BRACE    -> '{'
-RIGHT BRACE   -> '}'
-LEFT BRACKET  -> '['
-RIGHT BRACKET -> ']'
-LEFT PARANTHESIS -> '|'
-RIGHT PARANTHESIS -> '|'
-COLON         -> ':'
-SEMICOLON     -> ';'
+FUNCTION := fun
+INTEGER := integer
+VOID := void
+FOR := for
+IF := if
+RETURN := yeet
+ASSIGN := ->
+PLUS ASSIGN := +->
+ARROW := =>
+PLUS := +
+MINUS := -
+MULTIPLY := *
+DIVIDE := /
+LESS := <
+GREATER := >
+LESS EQUAL := <=
+GREATER EQUAL := >=
+EQUAL := ==
+NOT_EQUAL := !=
+OUTPUT := out
+INPUT := in
+LEFT BRACE := {
+RIGHT BRACE := }
+LEFT BRACKET := [
+RIGHT BRACKET := ]
+LEFT PARANTHESIS := |
+RIGHT PARANTHESIS := |
+COLON := :
+SEMICOLON := ;
+COMMENT := //
