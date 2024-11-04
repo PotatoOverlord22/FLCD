@@ -1,0 +1,19 @@
+fun void: main | | => {
+    integer: first;
+    integer: second;
+    integer: third;
+
+    // read input
+    in first;
+
+    integer: max -> first;
+    if |second > max| {
+        max -> second;
+    }
+
+    if |third > max| {
+        max -> third;
+    }
+
+    out max;
+}

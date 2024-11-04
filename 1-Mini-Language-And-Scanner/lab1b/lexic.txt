@@ -1,0 +1,47 @@
+Alphabet:
+
+- upper (A-Z) and lower case letters (a-z) of the English alphabet
+
+- underline character '_';
+
+- decimal digits (0-9);
+
+- special symbols, representing:
+
+
+Lexic:
+
+a. Special symbols, representing:
+
+    - operators: +, -, *, /, =>, ->, +=, <, >, <=, >=, =, !=, ==, &&, |, +->,
+
+    - separators: | |, :, ;, { }, [ ],
+
+    - reserved words: fun integer void const if else for while yeet hopa daidai
+
+b. Identifiers
+
+   -a sequence of letters and  digits, such that the first character is a letter; the rule is:
+
+    identifier ::= letter | letter{letter}{digit}
+
+    letter ::= "A" | "B" | . ..| "Z"
+
+    digit ::= "0" | "1" |...| "9"
+
+c. Constants
+
+    1.integer - rule:
+          noconst:= "+" number | "-" number | number
+
+          no:= digit{no}
+
+    2.character
+        character:='letter'|'digit'
+
+    3.string
+        constchar:="string"
+
+        string:=char{string}
+
+        char:=letter|digit

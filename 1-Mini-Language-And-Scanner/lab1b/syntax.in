@@ -1,0 +1,51 @@
+program ::= function_list "FUN" "VOID" ":" "main" "|" "|" "=>" block
+
+function_list ::= function | function function_list
+
+function ::= "FUN" return_type ":" IDENTIFIER "|" param_list "|" "=>" block
+
+return_type ::= "INTEGER" | "VOID"
+
+param_list ::= param {"," param_list} | empty
+
+param ::= type ":" IDENTIFIER
+
+type1 ::= "INTEGER"
+
+type  ::= type1|arraydecl
+
+arraydecl ::= type1 "[" nr "]"
+
+block ::= "{" statement_list "}"
+
+decllist ::= declaration | declaration ";" decllist
+
+declaration ::= type ":" IDENTIFIER ";"
+
+stmtlist ::= stmt | stmt ";" stmtlist
+
+stmt ::= simplstmt | structstmt
+
+simplstmt ::= assignstmt | iostmt ";"
+
+assignstmt ::= IDENTIFIER "->" expression ";"
+
+declaration_assign ::= type ":" IDENTIFIER "->" expression ";"
+
+expression ::= expression "+" term | term
+
+term ::= term "*" factor | factor
+
+factor ::= "|" expression "|" | IDENTIFIER
+
+iostmt ::= "in >> " | "out << " IDENTIFIER
+
+structstmt ::= cmpdstmt | ifstmt | whilestmt
+
+ifstmt ::= "IF" "|"condition"|" block ["else" block]
+
+whilestmt ::= "WHILE" "|"condition"|" block
+
+condition ::= expression RELATION expression
+
+RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"

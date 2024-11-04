@@ -1,0 +1,29 @@
+fun integer: max_array |integer[]: arr| => {
+    integer: max -> arr[0];
+    for |integer: i -> 0; i < arr.length; i -> i + 1| {
+        if |arr[i] > max| {
+            max -> arr[i];
+        }
+    }
+
+    yeet max;
+}
+
+fun integer: sum_array |integer[]: arr| => {
+    integer: sum -> 0;
+    for |integer: i -> 0; i < arr.length; i -> i + 1| {
+        sum +-> arr[i];
+    }
+
+    yeet sum;
+}
+
+fun void: main || => {
+    integer[]: arr;
+
+    arr.append|1|;
+    arr.append|2|;
+
+    out max_array|arr|;
+    out sum_array|arr|;
+}
