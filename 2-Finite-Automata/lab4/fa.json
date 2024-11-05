@@ -1,0 +1,28 @@
+{
+    "states": ["p", "q", "r"],
+    "initial_state": "p",
+    "final_states": ["r"],
+    "alphabet": ["a", "b"],
+    "transitions": [
+      {
+        "from": "p",
+        "to": "q",
+        "on": "a"
+      },
+      {
+        "from": "q",
+        "to": "r",
+        "on": "a"
+      },
+      {
+        "from": "q",
+        "to": "q",
+        "on": "b"
+      },
+      {
+        "from": "r",
+        "to": "r",
+        "on": "b"
+      }
+    ]
+}
