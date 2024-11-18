@@ -15,11 +15,5 @@ namespace FLCD._3_Parser.lab5
 
         [JsonPropertyName("productions")]
         public Dictionary<string, HashSet<string>> Productions { get; set; }
-
-        public GrammarData()
-        {
-            NonTerminals = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            Terminals = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        }
     }
 }
