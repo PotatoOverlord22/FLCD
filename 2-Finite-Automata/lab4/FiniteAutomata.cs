@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 public class FiniteAutomaton
 {
@@ -26,10 +23,10 @@ public class FiniteAutomaton
         var jsonString = File.ReadAllText(filePath);
         FiniteAutomatonData faData = JsonSerializer.Deserialize<FiniteAutomatonData>(jsonString);
 
-        var states = new HashSet<string>(faData.States);
-        var alphabet = new HashSet<string>(faData.Alphabet);
-        var finalStates = new HashSet<string>(faData.FinalStates);
-        var transitions = faData.Transitions;
+        HashSet<string> states = new HashSet<string>(faData.States);
+        HashSet<string> alphabet = new HashSet<string>(faData.Alphabet);
+        HashSet<string> finalStates = new HashSet<string>(faData.FinalStates);
+        List<Transition> transitions = faData.Transitions;
 
         return new FiniteAutomaton(states, faData.InitialState, finalStates, alphabet, transitions);
     }
@@ -41,6 +38,7 @@ public class FiniteAutomaton
         Console.WriteLine("Final States: " + string.Join(", ", FinalStates));
         Console.WriteLine("Alphabet: " + string.Join(", ", Alphabet));
         Console.WriteLine("Transitions:");
+
         foreach (var transition in Transitions)
         {
             Console.WriteLine($"  {transition.From} --{transition.On}--> {transition.To}");
@@ -53,7 +51,7 @@ public class FiniteAutomaton
         foreach (char symbol in sequence)
         {
             string symbolStr = symbol.ToString();
-            var transition = Transitions.Find(t => t.From == currentState && t.On == symbolStr);
+            Transition? transition = Transitions.Find(t => t.From == currentState && t.On == symbolStr);
 
             if (transition != null)
             {
@@ -64,6 +62,7 @@ public class FiniteAutomaton
                 return false;
             }
         }
+
         return FinalStates.Contains(currentState);
     }
 }

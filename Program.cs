@@ -1,5 +1,6 @@
 ﻿using FLCD._1_Mini_Language_And_Scanner.lab2;
 using FLCD._1_Mini_Language_And_Scanner.lab3;
+using FLCD._3_Parser.lab5;
 
 namespace FLCD
 {
@@ -7,26 +8,32 @@ namespace FLCD
     {
         static void Main(string[] args)
         {
-            Scanner scanner = new Scanner(new SymbolTable(100), "../../../1-Mini-Language-And-Scanner/lab1b/token.in");
-            scanner.ScanSourceFile("../../../1-Mini-Language-And-Scanner/lab1a/p1", "../../../1-Mini-Language-And-Scanner/lab2/pif.out",
-                "../../../1-Mini-Language-And-Scanner/lab2/st.out");
+            string filePath = "../../../3-Parser/lab5/g1.json";
+            Grammar grammar = Grammar.LoadFromJson(filePath);
 
-            /*string filePath = "../../../2-Finite-Automata/lab4/fa.json";
-            var finiteAutomaton = FiniteAutomaton.LoadFromJson(filePath);
+            grammar.DisplayGrammarData();
 
-            finiteAutomaton.Display();
-
-            Console.Write("Enter a sequence to check if it's accepted by the FA: ");
-            string sequence = Console.ReadLine();
-
-            if (finiteAutomaton.IsAccepted(sequence))
+            if (grammar.CFG())
             {
-                Console.WriteLine("The sequence is accepted by the FA.");
+                Console.WriteLine("\nThe grammar is CFG.");
             }
             else
             {
-                Console.WriteLine("The sequence is not accepted by the FA.");
-            }*/
+                Console.WriteLine("\nThe grammar is not CFG.");
+            }
+
+            while (true)
+            {
+                Console.WriteLine("\nEnter a non terminal to check production");
+
+                string input = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    break;
+                }
+
+                Console.WriteLine(grammar.GetProduction(input));
+            }
         }
     }
 }
