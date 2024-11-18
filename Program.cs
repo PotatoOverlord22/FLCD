@@ -13,7 +13,7 @@ namespace FLCD
 
             grammar.DisplayGrammarData();
 
-            if (grammar.CFG())
+            if (grammar.IsCFG())
             {
                 Console.WriteLine("\nThe grammar is CFG.");
             }

@@ -51,7 +51,7 @@ namespace FLCD._3_Parser.lab5
             return string.Join(" | ", GrammarData.Productions[nonTerminal]);
         }
 
-        public bool CFG()
+        public bool IsCFG()
         {
             foreach (var production in GrammarData.Productions)
             {
