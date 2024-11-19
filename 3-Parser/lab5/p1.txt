@@ -1,0 +1,12 @@
+@func int max_of_three ( int a, int b, int c ) {
+
+    ? ( a > b ) & ( a > c ) : {
+        -> a;
+    } :? ( b > a ) & ( b > c ):{
+        -> b
+    } : {
+        -> c;
+    }
+}
+
+# ( "max is: " , @max_of_three( 1, 2, 3 ) );

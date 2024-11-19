@@ -1,0 +1,14 @@
+@func bool is_prime(int n){
+    ? (n <= 1):{
+        -> false;
+    }
+
+    ~ (i<-2, n-1) : {
+        ? (n/0 ==0 ):{
+            -> false;
+        }
+    }
+    -> true;
+}
+
+#("7 is prime? ",@is_prime(7) );

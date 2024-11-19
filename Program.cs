@@ -8,12 +8,12 @@ namespace FLCD
     {
         static void Main(string[] args)
         {
-            string filePath = "../../../3-Parser/lab5/g1.json";
+            string filePath = "../../../3-Parser/lab5/g2.json";
             Grammar grammar = Grammar.LoadFromJson(filePath);
 
             grammar.DisplayGrammarData();
 
-            if (grammar.IsCFG())
+            if (grammar.IsCFG(true))
             {
                 Console.WriteLine("\nThe grammar is CFG.");
             }

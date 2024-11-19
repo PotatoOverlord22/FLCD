@@ -1,0 +1,183 @@
+{
+  "startSymbol": "program",
+  "nonTerminals": [
+    "program",
+    "funclist",
+    "stmtlist",
+    "stmt",
+    "funcdecl",
+    "paramlist",
+    "type",
+    "type1",
+    "arraydecl",
+    "cmpdstmt",
+    "simplstmt",
+    "structstmt",
+    "declaration",
+    "assignstmt",
+    "iostmt",
+    "returnstmt",
+    "declstmt",
+    "expression",
+    "term",
+    "factor",
+    "ifstmt",
+    "whilestmt",
+    "condition",
+    "RELATION",
+    "funccall",
+    "arglist"
+  ],
+  "terminals": [
+    "@func",
+    "bool",
+    "char",
+    "int",
+    "real",
+    "array",
+    "string",
+    "[",
+    "]",
+    "{",
+    "}",
+    "(",
+    ")",
+    "->",
+    "<-",
+    "+",
+    "-",
+    "*",
+    "/",
+    ">",
+    "<",
+    "<=",
+    "==",
+    ">=",
+    "!=",
+    "&",
+    "|",
+    "!",
+    "$",
+    "#",
+    "?",
+    ":?",
+    ":",
+    "=>",
+    "~",
+    "~:",
+    "id",
+    "num",
+    "true",
+    "false",
+    ";",
+    ","
+  ],
+  "productions": {
+    "program": [
+      "funclist stmtlist"
+    ],
+    "funclist": [
+      "funcdecl",
+      "funcdecl ; funclist"
+    ],
+    "stmtlist": [
+      "stmt",
+      "stmt ; stmtlist"
+    ],
+    "funcdecl": [
+      "@func type id ( paramlist ) { stmtlist }"
+    ],
+    "paramlist": [
+      "id",
+      "id , paramlist"
+    ],
+    "type": [
+      "type1",
+      "arraydecl"
+    ],
+    "type1": [
+      "bool",
+      "char",
+      "int",
+      "real"
+    ],
+    "arraydecl": [
+      "type1 array [ num ]"
+    ],
+    "cmpdstmt": [
+      "{ stmtlist }"
+    ],
+    "stmt": [
+      "simplstmt",
+      "structstmt"
+    ],
+    "simplstmt": [
+      "assignstmt",
+      "iostmt",
+      "returnstmt",
+      "declstmt"
+    ],
+    "declstmt": [
+      "type id"
+    ],
+    "assignstmt": [
+      "id <- expression"
+    ],
+    "iostmt": [
+      "$ id",
+      "# ( string , funccall )"
+    ],
+    "returnstmt": [
+      "-> expression"
+    ],
+    "expression": [
+      "expression + term",
+      "expression - term",
+      "term"
+    ],
+    "term": [
+      "term * factor",
+      "term / factor",
+      "factor"
+    ],
+    "factor": [
+      "( expression )",
+      "id",
+      "num",
+      "true",
+      "false",
+      "funccall"
+    ],
+    "structstmt": [
+      "cmpdstmt",
+      "ifstmt",
+      "whilestmt"
+    ],
+    "ifstmt": [
+      "? ( condition ) => stmt",
+      "? ( condition ) => stmt : stmt",
+      "? ( condition ) => stmt :? condition : stmt"
+    ],
+    "whilestmt": [
+      "~: condition => stmt"
+    ],
+    "condition": [
+      "expression RELATION expression"
+    ],
+    "RELATION": [
+      "<",
+      "<=",
+      "==",
+      ">=",
+      ">",
+      "!="
+    ],
+    "funccall": [
+      "id ( arglist )"
+    ],
+    "arglist": [
+      "expression",
+      "expression , arglist"
+    ]
+  }
+}

@@ -31,10 +31,10 @@ namespace FLCD._3_Parser.lab5
 
         public void DisplayGrammarData()
         {
-            Console.WriteLine("Start Symbol: " + GrammarData.StartSymbol);
-            Console.WriteLine("Non Terminals: " + string.Join(", ", GrammarData.NonTerminals));
-            Console.WriteLine("Terminals: " + string.Join(", ", GrammarData.Terminals));
-            Console.WriteLine("Productions:");
+            Console.WriteLine("\nStart Symbol: " + GrammarData.StartSymbol);
+            Console.WriteLine("\nNon Terminals: " + string.Join(", ", GrammarData.NonTerminals));
+            Console.WriteLine("\nTerminals: " + string.Join(", ", GrammarData.Terminals));
+            Console.WriteLine("\nProductions:");
             foreach (var production in GrammarData.Productions)
             {
                 Console.WriteLine($"{production.Key} -> {string.Join(" | ", production.Value)}");
@@ -51,7 +51,7 @@ namespace FLCD._3_Parser.lab5
             return string.Join(" | ", GrammarData.Productions[nonTerminal]);
         }
 
-        public bool IsCFG()
+        public bool IsCFG(bool parseByWords = false)
         {
             foreach (var production in GrammarData.Productions)
             {
@@ -62,14 +62,18 @@ namespace FLCD._3_Parser.lab5
 
                 foreach (string rule in production.Value)
                 {
-                    foreach (char symbol in rule)
+                    IEnumerable<string> symbols = parseByWords
+                     ? rule.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                     : rule.Select(c => c.ToString());
+
+                    foreach (string symbol in symbols)
                     {
-                        if (symbol == 'ε')
+                        if (symbol == "ε")
                         {
                             continue;
                         }
 
-                        if (!GrammarData.NonTerminals.Contains(symbol.ToString()) && !GrammarData.Terminals.Contains(symbol.ToString()))
+                        if (!GrammarData.NonTerminals.Contains(symbol) && !GrammarData.Terminals.Contains(symbol))
                         {
                             return false;
                         }
