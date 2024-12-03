@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FLCD._3_Parser.lab5
 {
@@ -15,5 +16,14 @@ namespace FLCD._3_Parser.lab5
 
         [JsonPropertyName("productions")]
         public Dictionary<string, HashSet<string>> Productions { get; set; }
+
+        public GrammarData DeepCopy()
+        {
+            var json = JsonSerializer.Serialize(this);
+
+            var deepCopy = JsonSerializer.Deserialize<GrammarData>(json);
+
+            return deepCopy;
+        }
     }
 }

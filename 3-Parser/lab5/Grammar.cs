@@ -5,18 +5,23 @@ namespace FLCD._3_Parser.lab5
     public class Grammar
     {
         public GrammarData GrammarData { get; set; }
+        public bool ParseByWords { get; set; }
+        public const string EnrichedGrammarStartSymbol = "S'";
+        public static string Epsilon = "ε";
 
-        public Grammar()
+        public Grammar(bool parseByWords = false)
         {
             GrammarData = new GrammarData();
+            ParseByWords = parseByWords;
         }
 
-        public Grammar(GrammarData grammarData)
+        public Grammar(GrammarData grammarData, bool parseByWords = false)
         {
             GrammarData = grammarData;
+            ParseByWords = parseByWords;
         }
 
-        public static Grammar LoadFromJson(string filePath)
+        public static Grammar LoadFromJson(string filePath, bool parseByWords = false)
         {
             string jsonString = File.ReadAllText(filePath);
             GrammarData? grammarData = JsonSerializer.Deserialize<GrammarData>(jsonString);
@@ -26,7 +31,7 @@ namespace FLCD._3_Parser.lab5
                 return new Grammar();
             }
 
-            return new Grammar(grammarData);
+            return new Grammar(grammarData, parseByWords);
         }
 
         public void DisplayGrammarData()
@@ -62,9 +67,7 @@ namespace FLCD._3_Parser.lab5
 
                 foreach (string rule in production.Value)
                 {
-                    IEnumerable<string> symbols = parseByWords
-                     ? rule.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                     : rule.Select(c => c.ToString());
+                    var symbols = ParseRule(rule);
 
                     foreach (string symbol in symbols)
                     {
@@ -83,5 +86,55 @@ namespace FLCD._3_Parser.lab5
 
             return true;
         }
+
+        public List<string> ParseRule(string rule)
+        {
+            return ParseByWords
+                ? rule.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList()
+                : rule.Select(c => c.ToString()).ToList();
+        }
+
+        public Grammar GetEnrichedGrammar()
+        {
+            if (GrammarData.StartSymbol == EnrichedGrammarStartSymbol)
+            {
+                throw new Exception("Grammar is already enriched.");
+            }
+
+            var enrichedGrammar = new Grammar(GrammarData.DeepCopy(), ParseByWords);
+            enrichedGrammar.EnrichGrammar();
+
+            return enrichedGrammar;
+        }
+
+        public void EnrichGrammar()
+        {
+            if (GrammarData.StartSymbol == EnrichedGrammarStartSymbol)
+            {
+                return;
+            }
+
+            GrammarData.NonTerminals.Add(EnrichedGrammarStartSymbol);
+            GrammarData.Productions[EnrichedGrammarStartSymbol] = new HashSet<string> { GrammarData.StartSymbol };
+            GrammarData.StartSymbol = EnrichedGrammarStartSymbol;
+        }
+
+        public List<(string, string)> GetOrderedProductions()
+        {
+            var orderedProductions = new List<(string, string)>();
+
+            foreach (var production in GrammarData.Productions)
+            {
+                string nonTerminal = production.Key;
+
+                foreach (var rule in production.Value)
+                {
+                    orderedProductions.Add((nonTerminal, rule));
+                }
+            }
+
+            return orderedProductions;
+        }
+
     }
 }

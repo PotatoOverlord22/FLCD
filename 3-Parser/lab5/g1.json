@@ -1,9 +1,9 @@
 ﻿{
   "startSymbol": "S",
   "nonTerminals": [ "S", "A" ],
-  "terminals": [ "a", "b" ],
+  "terminals": [ "a", "b", "c" ],
   "productions": {
-    "S": [ "ε", "aA" ],
-    "A": [ "aA", "bA", "a", "b" ]
+    "S": [ "aA" ],
+    "A": [ "bA", "c" ]
   }
 }
